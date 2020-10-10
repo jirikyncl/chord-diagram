@@ -1,0 +1,29 @@
+<svg viewBox="0 0 400 400" width="{$size}" height="{$size}" style="background-color:{$backgroundColor}">
+    {for $i = 0; $i < 6; $i++}
+        {var $x = ($i + 1) * 50, $y = ($i + 1) * 50 + 25}
+        <line x1="{$x}" y1="75" x2="{$x}" y2="350" stroke="{$color}" stroke-width="3" />
+        <line x1="50" y1="{$y}" x2="300" y2="{$y}" stroke="{$color}" stroke-width="{if $i === 0}9{else}3{/if}" />
+    {/for}
+
+    {foreach $chord as $rowNumber => $chordRow}
+        {foreach $chordRow as $key => $chordValue}
+            {if !empty($chordValue)}
+                {var $x = ($key + 1) * 50, $y = ($rowNumber + 1) * 50}
+                {if $rowNumber === 0 || count($chordRow) === ($key + 1)}
+                    <text x="{$x}" y="{$y}" fill="{$color}">{$chordValue}</text>
+                {else}
+                    <circle cx="{$x}" cy="{$y}" r="16" fill="{$color}" />
+                    <text x="{$x}" y="{$y}" fill="{$backgroundColor}">{$chordValue}</text>
+                {/if}
+            {/if}
+        {/foreach}
+    {/foreach}
+
+    <style><![CDATA[
+    text {
+        text-anchor: middle;
+        alignment-baseline: central;
+        font: 24px Verdana, Helvetica, Arial, sans-serif;
+    }
+    ]]></style>
+</svg>
