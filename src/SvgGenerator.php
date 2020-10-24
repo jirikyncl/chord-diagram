@@ -25,7 +25,7 @@ class SvgGenerator
     public function __construct(
         int $size = 400,
         string $color = 'black',
-        string $backgroundColor = '#e9e9e9'
+        string $backgroundColor = '#ffffff'
     ) {
         $this->size = $size;
         $this->color = $color;

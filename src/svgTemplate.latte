@@ -1,29 +1,66 @@
-<svg viewBox="0 0 400 400" width="{$size}" height="{$size}" style="background-color:{$backgroundColor}">
+<svg
+    viewBox="0 0 400 400"
+    width="{$size}"
+    height="{$size}"
+>
+    {if $backgroundColor}
+        <rect
+            width="400"
+            height="400"
+            fill="{$backgroundColor}"
+        />
+    {/if}
+
     {for $i = 0; $i < 6; $i++}
-        {var $x = ($i + 1) * 50, $y = ($i + 1) * 50 + 25}
-        <line x1="{$x}" y1="75" x2="{$x}" y2="350" stroke="{$color}" stroke-width="3" />
-        <line x1="50" y1="{$y}" x2="300" y2="{$y}" stroke="{$color}" stroke-width="{if $i === 0}9{else}3{/if}" />
+        {var $x = ($i + 1) * 50}
+        {var $y = ($i + 1) * 50 + 25}
+        <line
+            x1="{$x}"
+            y1="75"
+            x2="{$x}"
+            y2="350"
+            stroke="{$color}"
+            stroke-width="4"
+        />
+        <line
+            x1="50"
+            y1="{$y - ($i === 0 ? 4 : 0)}"
+            x2="300"
+            y2="{$y - ($i === 0 ? 4 : 0)}"
+            stroke="{$color}"
+            stroke-width="{if $i === 0}12{else}4{/if}"
+        />
     {/for}
 
-    {foreach $chord as $rowNumber => $chordRow}
-        {foreach $chordRow as $key => $chordValue}
+    {foreach $chord as $fretNumber => $fretData}
+        {foreach $fretData as $stringNumber => $chordValue}
             {if !empty($chordValue)}
-                {var $x = ($key + 1) * 50, $y = ($rowNumber + 1) * 50}
-                {if $rowNumber === 0 || count($chordRow) === ($key + 1)}
-                    <text x="{$x}" y="{$y}" fill="{$color}">{$chordValue}</text>
+                {var $x = ($stringNumber + 1) * 50}
+                {var $y = ($fretNumber + 1) * 50}
+                {if $fretNumber === 0 || $stringNumber === 6}
+                    <text
+                        x="{$x - ($stringNumber !== 6 ? 8 : 10)}"
+                        y="{$y + ($stringNumber === 6 ? 35 : 0)}"
+                        fill="{$color}"
+                        font-size="30"
+                        font-family="Arial, Helvetica, sans-serif"
+                    >{$chordValue}</text>
                 {else}
-                    <circle cx="{$x}" cy="{$y}" r="16" fill="{$color}" />
-                    <text x="{$x}" y="{$y}" fill="{$backgroundColor}">{$chordValue}</text>
+                    <circle
+                        cx="{$x}"
+                        cy="{$y}"
+                        r="18"
+                        fill="{$color}"
+                    />
+                    <text
+                        x="{$x - 6}"
+                        y="{$y + 7}"
+                        font-size="20"
+                        font-family="Arial, Helvetica, sans-serif"
+                        fill="{$backgroundColor}"
+                    >{$chordValue}</text>
                 {/if}
             {/if}
         {/foreach}
     {/foreach}
-
-    <style><![CDATA[
-    text {
-        text-anchor: middle;
-        alignment-baseline: central;
-        font: 24px Verdana, Helvetica, Arial, sans-serif;
-    }
-    ]]></style>
 </svg>

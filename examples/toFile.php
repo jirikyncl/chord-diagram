@@ -15,6 +15,7 @@ $chords = [
 ];
 
 $svgGenerator = new SvgGenerator();
+$svgGenerator->setSize(600);
 
 $chord1 = $svgGenerator->renderSvg($chords[0]);
 
