@@ -1,5 +1,5 @@
 {
-    "name": "jirikyncl/chord=diagram",
+    "name": "jirikyncl/chord-diagram",
     "description": "PHP lib for guitar chord diagram printing to SVG",
     "config": {
         "platform": {
@@ -15,6 +15,9 @@
             "name": "Jiri Kyncl",
             "email": "jirkakyncl@seznam.cz"
         }
-    ]
+    ],
+    "autoload": {
+        "classmap": ["src/"]
+    }
 }
 
